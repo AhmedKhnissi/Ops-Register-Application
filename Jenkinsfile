@@ -34,10 +34,11 @@ pipeline {
                    git config --global user.email "ahmed.khnissi@esprit.tn"
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
+                   git push -f https://github.com/AhmedKhnissi/Ops-Register-Application.git
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/AhmedKhnissi/Ops-Register-Application main"
-                }
+                //withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                //  sh "git push https://github.com/AhmedKhnissi/Ops-Register-Application main"
+              //  }
             }
         }
       
