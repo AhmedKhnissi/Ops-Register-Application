@@ -29,17 +29,18 @@ pipeline {
 
         stage("Push the changed deployment file to Git") {
             steps {
-                sh """
-                   git config --global user.name "AhmedKhnissi"
-                   git config --global user.email "ahmed.khnissi@esprit.tn"
-                   git add deployment.yaml
-                   git commit -m "Updated Deployment Manifest"
-                   git push -f https://github.com/AhmedKhnissi/Ops-Register-Application.git
-                """
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                    sh """
+                       git config --global user.name "AhmedKhnissi"
+                       git config --global user.email "ahmed.khnissi@esprit.tn"
+                       git add deployment.yaml
+                       git commit -m "Updated Deployment Manifest"
+                       git push -f https://github.com/AhmedKhnissi/Ops-Register-Application.git
+                    """
                 //withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
                 //  sh "git push https://github.com/AhmedKhnissi/Ops-Register-Application main"
               //  }
-            }
+            }}
         }
       
     }
